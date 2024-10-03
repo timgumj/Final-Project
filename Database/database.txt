@@ -1,0 +1,386 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Sep 05, 2024 at 04:16 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `tutoring`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `booking_date` date DEFAULT NULL,
+  `time_slot` time DEFAULT NULL,
+  `status` enum('confirmed','pending','canceled','completed') DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `cancellation_pending` tinyint(1) DEFAULT 0,
+  `impact_on_capacity` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `student_id`, `service_id`, `booking_date`, `time_slot`, `status`, `created_at`, `cancellation_pending`, `impact_on_capacity`) VALUES
+(69, 1, 52, NULL, NULL, 'confirmed', '2024-09-03 13:35:45', 0, 0),
+(72, 1, 58, NULL, NULL, 'completed', '2024-09-05 13:48:12', 0, 0),
+(73, 1, 58, NULL, NULL, 'completed', '2024-09-05 13:51:49', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course_days`
+--
+
+CREATE TABLE `course_days` (
+  `id` int(11) NOT NULL,
+  `tutoring_service_id` int(11) NOT NULL,
+  `course_date` datetime NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `file_type` enum('pdf','video') DEFAULT NULL,
+  `file_path` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `course_days`
+--
+
+INSERT INTO `course_days` (`id`, `tutoring_service_id`, `course_date`, `title`, `description`, `file_type`, `file_path`) VALUES
+(126, 52, '2024-09-16 00:00:00', NULL, NULL, NULL, NULL),
+(127, 52, '2024-09-17 00:00:00', 'Day 1:', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/UtbfATNSePk?si=Q1euM6k9Oe6tOdOs\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>\r\n\r\nThis 2-hour introductory course is designed for students preparing to embark on their undergraduate studies in Biology. Serving as a comprehensive overview, the course lays the groundwork for understanding the core concepts and principles that form the foundation of biological sciences. During this session, students will be introduced to key topics such as cell biology, genetics, evolution, and ecology. The course also provides an overview of the scientific method and the importance of research and experimentation in biology. \r\n\r\nThrough engaging lectures and interactive discussions, students will gain a clear understanding of what to expect in their upcoming studies and how to approach complex biological concepts with confidence. This course is an essential stepping stone for anyone looking to pursue a degree in Biology, offering a solid foundation to build upon in more advanced courses.', NULL, NULL),
+(128, 52, '2024-09-18 00:00:00', NULL, NULL, NULL, NULL),
+(129, 52, '2024-09-19 00:00:00', NULL, NULL, NULL, NULL),
+(130, 52, '2024-09-20 00:00:00', NULL, NULL, NULL, NULL),
+(131, 52, '2024-09-23 00:00:00', NULL, NULL, NULL, NULL),
+(132, 52, '2024-09-17 00:00:00', 'Day 1:', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/UtbfATNSePk?si=Q1euM6k9Oe6tOdOs\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>\r\n\r\nThis 2-hour introductory course is designed for students preparing to embark on their undergraduate studies in Biology. Serving as a comprehensive overview, the course lays the groundwork for understanding the core concepts and principles that form the foundation of biological sciences. During this session, students will be introduced to key topics such as cell biology, genetics, evolution, and ecology. The course also provides an overview of the scientific method and the importance of research and experimentation in biology. \r\n\r\nThrough engaging lectures and interactive discussions, students will gain a clear understanding of what to expect in their upcoming studies and how to approach complex biological concepts with confidence. This course is an essential stepping stone for anyone looking to pursue a degree in Biology, offering a solid foundation to build upon in more advanced courses.', 'pdf', '66d6dc5c5b1da.pdf'),
+(133, 52, '2024-09-17 00:00:00', 'Day 1:', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/UtbfATNSePk?si=Q1euM6k9Oe6tOdOs\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>\r\n\r\nThis 2-hour introductory course is designed for students preparing to embark on their undergraduate studies in Biology. Serving as a comprehensive overview, the course lays the groundwork for understanding the core concepts and principles that form the foundation of biological sciences. During this session, students will be introduced to key topics such as cell biology, genetics, evolution, and ecology. The course also provides an overview of the scientific method and the importance of research and experimentation in biology. \r\n\r\nThrough engaging lectures and interactive discussions, students will gain a clear understanding of what to expect in their upcoming studies and how to approach complex biological concepts with confidence. This course is an essential stepping stone for anyone looking to pursue a degree in Biology, offering a solid foundation to build upon in more advanced courses.', 'pdf', '66d6dc788dd26.pdf'),
+(134, 52, '2024-09-17 00:00:00', 'Day 1:', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/UtbfATNSePk?si=Q1euM6k9Oe6tOdOs\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>\r\n\r\nThis 2-hour introductory course is designed for students preparing to embark on their undergraduate studies in Biology. Serving as a comprehensive overview, the course lays the groundwork for understanding the core concepts and principles that form the foundation of biological sciences. During this session, students will be introduced to key topics such as cell biology, genetics, evolution, and ecology. The course also provides an overview of the scientific method and the importance of research and experimentation in biology. \r\n\r\nThrough engaging lectures and interactive discussions, students will gain a clear understanding of what to expect in their upcoming studies and how to approach complex biological concepts with confidence. This course is an essential stepping stone for anyone looking to pursue a degree in Biology, offering a solid foundation to build upon in more advanced courses.', 'pdf', '66d6df11180a6.pdf'),
+(162, 57, '2024-09-02 00:00:00', NULL, NULL, NULL, NULL),
+(163, 57, '2024-09-03 00:00:00', NULL, NULL, NULL, NULL),
+(164, 57, '2024-09-04 00:00:00', NULL, NULL, NULL, NULL),
+(165, 57, '2024-09-05 00:00:00', NULL, NULL, NULL, NULL),
+(166, 57, '2024-09-06 00:00:00', NULL, NULL, NULL, NULL),
+(167, 57, '2024-09-09 00:00:00', NULL, NULL, NULL, NULL),
+(168, 57, '2024-09-03 00:00:00', 'Day 1: Introduction', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/UtbfATNSePk?si=Q1euM6k9Oe6tOdOs\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>\r\n\r\nThis 2-hour introductory course is designed for students preparing to embark on their undergraduate studies in Biology. Serving as a comprehensive overview, the course lays the groundwork for understanding the core concepts and principles that form the foundation of biological sciences. During this session, students will be introduced to key topics such as cell biology, genetics, evolution, and ecology. The course also provides an overview of the scientific method and the importance of research and experimentation in biology. \r\n\r\nThrough engaging lectures and interactive discussions, students will gain a clear understanding of what to expect in their upcoming studies and how to approach complex biological concepts with confidence. This course is an essential stepping stone for anyone looking to pursue a degree in Biology, offering a solid foundation to build upon in more advanced courses.', 'pdf', '66d71cc923b63.pdf'),
+(169, 58, '2024-09-02 00:00:00', NULL, NULL, NULL, NULL),
+(170, 58, '2024-09-03 00:00:00', 'Day 1 Intro: ', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/UtbfATNSePk?si=Q1euM6k9Oe6tOdOs\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>\r\n\r\nThis 2-hour introductory course is designed for students preparing to embark on their undergraduate studies in Biology. Serving as a comprehensive overview, the course lays the groundwork for understanding the core concepts and principles that form the foundation of biological sciences. During this session, students will be introduced to key topics such as cell biology, genetics, evolution, and ecology. The course also provides an overview of the scientific method and the importance of research and experimentation in biology. \r\n\r\nThrough engaging lectures and interactive discussions, students will gain a clear understanding of what to expect in their upcoming studies and how to approach complex biological concepts with confidence. This course is an essential stepping stone for anyone looking to pursue a degree in Biology, offering a solid foundation to build upon in more advanced courses.', NULL, NULL),
+(171, 58, '2024-09-04 00:00:00', NULL, NULL, NULL, NULL),
+(172, 58, '2024-09-05 00:00:00', NULL, NULL, NULL, NULL),
+(173, 58, '2024-09-06 00:00:00', NULL, NULL, NULL, NULL),
+(174, 58, '2024-09-09 00:00:00', NULL, NULL, NULL, NULL),
+(175, 58, '2024-09-03 00:00:00', 'Day 1 Intro: ', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/UtbfATNSePk?si=Q1euM6k9Oe6tOdOs\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>\r\n\r\nThis 2-hour introductory course is designed for students preparing to embark on their undergraduate studies in Biology. Serving as a comprehensive overview, the course lays the groundwork for understanding the core concepts and principles that form the foundation of biological sciences. During this session, students will be introduced to key topics such as cell biology, genetics, evolution, and ecology. The course also provides an overview of the scientific method and the importance of research and experimentation in biology. \r\n\r\nThrough engaging lectures and interactive discussions, students will gain a clear understanding of what to expect in their upcoming studies and how to approach complex biological concepts with confidence. This course is an essential stepping stone for anyone looking to pursue a degree in Biology, offering a solid foundation to build upon in more advanced courses.', 'pdf', '66d9b71befc94.pdf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL CHECK (`rating` between 1 and 5),
+  `review_text` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `student_id`, `service_id`, `rating`, `review_text`, `created_at`) VALUES
+(9, 1, 57, 4, 'The course was nice', '2024-09-03 14:32:59'),
+(10, 1, 58, 4, 'The course was very helpful', '2024-09-05 14:06:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subjects`
+--
+
+CREATE TABLE `subjects` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `name`, `description`) VALUES
+(1, 'Biology', 'Study of living organisms.'),
+(2, 'Chemistry', 'Study of substances and their properties.'),
+(3, 'Physics', 'Study of matter, energy, and the interactions between them.'),
+(4, 'Mathematics', 'Study of numbers, shapes, and patterns.'),
+(5, 'Computer Science', 'Study of computation, algorithms, and information processing.'),
+(6, 'Economics', 'Study of production, distribution, and consumption of goods and services.'),
+(7, 'Business Administration', 'Study of managing a business or organization.'),
+(8, 'Engineering', 'Application of science and mathematics to solve problems.'),
+(9, 'Medicine', 'Study of diagnosing and treating illnesses.'),
+(10, 'Law', 'Study of legal systems, rules, and principles.'),
+(11, 'Psychology', 'Study of the mind and behavior.'),
+(12, 'Sociology', 'Study of social behavior and society.'),
+(13, 'History', 'Study of past events and their impact on the present.'),
+(14, 'Philosophy', 'Study of the fundamental nature of knowledge, reality, and existence.'),
+(15, 'Political Science', 'Study of government systems and political activities.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tutoring_services`
+--
+
+CREATE TABLE `tutoring_services` (
+  `id` int(11) NOT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `trainer_id` int(11) DEFAULT NULL,
+  `university_id` int(11) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `available_slots` int(11) DEFAULT NULL,
+  `short_description` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `is_available` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tutoring_services`
+--
+
+INSERT INTO `tutoring_services` (`id`, `subject_id`, `trainer_id`, `university_id`, `description`, `price`, `available_slots`, `short_description`, `created_at`, `start_date`, `end_date`, `is_available`) VALUES
+(52, 7, 2, 18, NULL, 200.00, 2, 'This is a course in Buisiness admin.', '2024-09-03 09:50:06', '2024-09-16', '2024-09-23', 1),
+(57, 1, 2, 15, NULL, 200.00, 3, 'Biology course', '2024-09-03 14:25:17', '2024-09-02', '2024-09-09', 1),
+(58, 1, 5, 1, NULL, 200.00, 3, 'Biology course', '2024-09-05 13:36:12', '2024-09-02', '2024-09-09', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `universities`
+--
+
+CREATE TABLE `universities` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `universities`
+--
+
+INSERT INTO `universities` (`id`, `name`, `city`) VALUES
+(1, 'Charles University', 'Prague'),
+(2, 'Czech Technical University in Prague', 'Prague'),
+(3, 'University of Economics, Prague', 'Prague'),
+(4, 'Masaryk University', 'Brno'),
+(5, 'Brno University of Technology', 'Brno'),
+(6, 'PalackÃ½ University Olomouc', 'Olomouc'),
+(7, 'University of South Bohemia', 'ÄŒeskÃ© BudÄ›jovice'),
+(8, 'University of Ostrava', 'Ostrava'),
+(9, 'Mendel University in Brno', 'Brno'),
+(10, 'University of West Bohemia', 'PlzeÅˆ'),
+(11, 'University of Pardubice', 'Pardubice'),
+(12, 'Technical University of Liberec', 'Liberec'),
+(13, 'Tomas Bata University in ZlÃ­n', 'ZlÃ­n'),
+(14, 'Jan Evangelista PurkynÄ› University in ÃšstÃ­ nad Labem', 'ÃšstÃ­ nad Labem'),
+(15, 'Silesian University in Opava', 'Opava'),
+(16, 'University of Hradec KrÃ¡lovÃ©', 'Hradec KrÃ¡lovÃ©'),
+(17, 'University of Veterinary and Pharmaceutical Sciences Brno', 'Brno'),
+(18, 'Academy of Arts, Architecture and Design in Prague', 'Prague'),
+(19, 'Academy of Performing Arts in Prague', 'Prague'),
+(20, 'JanÃ¡Äek Academy of Music and Performing Arts', 'Brno');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `firstname` varchar(100) DEFAULT NULL,
+  `lastname` varchar(100) DEFAULT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `password` varchar(256) DEFAULT NULL,
+  `role` enum('student','trainer','admin') NOT NULL,
+  `profile_info` text DEFAULT NULL,
+  `picture` varchar(255) DEFAULT 'avatar.png'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `profile_info`, `picture`) VALUES
+(1, 'ANTHONY', 'ZOLLAND', 'student@mail.com', 'ffc37ecdc9b1163389ea42e84c2f0a727b093e43fcd5ac17f2ef4e111b68686b', 'student', 'jsjshjhs', '66d70806d02e5.jpg'),
+(2, 'Prof.  JANA', 'NOVAKOVA', 'tutor1@mail.com', 'ffc37ecdc9b1163389ea42e84c2f0a727b093e43fcd5ac17f2ef4e111b68686b', 'trainer', 'Professor Jana Novakova is a seasoned academic at the University of Prague, with over 10 years of experience in the field of Business Administration. She is widely recognized for her expertise in strategic management and organizational behavior, focusing on the dynamics of organizational change and the impact of strategic decisions on company culture and performance. Her research has been published in leading journals, establishing her as a respected voice in her field.\r\n\r\nIn the classroom, Professor Novakova is known for her innovative teaching methods that blend traditional lectures with interactive case studies and simulations. She emphasizes real-world application, encouraging students to engage in collaborative problem-solving and critical thinking. Her approachable nature and commitment to student success make her a beloved mentor, guiding students to excel both academically and professionally.', '66d7085acfe85.png'),
+(3, 'admin', 'admin', 'admin@mail.com', 'ffc37ecdc9b1163389ea42e84c2f0a727b093e43fcd5ac17f2ef4e111b68686b', 'admin', 'admin', '66cf9a9c13833.jpg'),
+(5, 'Prof. JAN', 'NOVAK', 'tutor2@mail.com', 'ffc37ecdc9b1163389ea42e84c2f0a727b093e43fcd5ac17f2ef4e111b68686b', 'trainer', 'Professor Jan NovÃ¡k is a distinguished faculty member at Charles University in Prague, specializing in civil engineering. With over 20 years of experience in both academia and industry, Professor NovÃ¡k is renowned for his expertise in sustainable construction and innovative engineering solutions. His research has significantly contributed to advancing green building practices in the Czech Republic and beyond.', '66cf9643cfa86.jpg'),
+(6, 'ANITA', 'SAMA', 'student1@mail.com', 'ffc37ecdc9b1163389ea42e84c2f0a727b093e43fcd5ac17f2ef4e111b68686b', 'student', 'ANITA SAMA', '66cf98db4c90c.jpg');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `service_id` (`service_id`);
+
+--
+-- Indexes for table `course_days`
+--
+ALTER TABLE `course_days`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tutoring_service_id` (`tutoring_service_id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `service_id` (`service_id`);
+
+--
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `tutoring_services`
+--
+ALTER TABLE `tutoring_services`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subject_id` (`subject_id`),
+  ADD KEY `trainer_id` (`trainer_id`),
+  ADD KEY `university_id` (`university_id`);
+
+--
+-- Indexes for table `universities`
+--
+ALTER TABLE `universities`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+
+--
+-- AUTO_INCREMENT for table `course_days`
+--
+ALTER TABLE `course_days`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tutoring_services`
+--
+ALTER TABLE `tutoring_services`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+
+--
+-- AUTO_INCREMENT for table `universities`
+--
+ALTER TABLE `universities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `tutoring_services` (`id`);
+
+--
+-- Constraints for table `course_days`
+--
+ALTER TABLE `course_days`
+  ADD CONSTRAINT `course_days_ibfk_1` FOREIGN KEY (`tutoring_service_id`) REFERENCES `tutoring_services` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `tutoring_services` (`id`);
+
+--
+-- Constraints for table `tutoring_services`
+--
+ALTER TABLE `tutoring_services`
+  ADD CONSTRAINT `tutoring_services_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`),
+  ADD CONSTRAINT `tutoring_services_ibfk_2` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `tutoring_services_ibfk_3` FOREIGN KEY (`university_id`) REFERENCES `universities` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
